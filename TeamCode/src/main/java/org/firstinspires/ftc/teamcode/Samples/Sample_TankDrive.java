@@ -1,11 +1,11 @@
-package org.firstinspires.ftc.teamcode.AngelosBase.Samples;
+package org.firstinspires.ftc.teamcode.Samples;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.AngelosBase.Subsystems.TankDrive;
-import org.firstinspires.ftc.teamcode.AngelosBase.Util.GamepadEx;
+import org.firstinspires.ftc.teamcode.Subsystems.TankDrive;
+import org.firstinspires.ftc.teamcode.Util.GamepadEx;
 
 @Disabled // Remove this to see it on the Driver Station
 @TeleOp(name="Sample_TankDrive", group="Samples")

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.AngelosBase.Config;
+package org.firstinspires.ftc.teamcode.Config;
 
 public class HardwareMapConfig {
     public final static String LEFT_FRONT_DRIVE_ID = "left_front_drive";

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.AngelosBase.Tuners;
+package org.firstinspires.ftc.teamcode.Tuners;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.AngelosBase.Subsystems.TankDrive;
+import org.firstinspires.ftc.teamcode.Subsystems.TankDrive;
 
 // This TEST FILE: tunes the feedforward values for the drivebase motors
 // (++ FTCDashboard Config Variables)

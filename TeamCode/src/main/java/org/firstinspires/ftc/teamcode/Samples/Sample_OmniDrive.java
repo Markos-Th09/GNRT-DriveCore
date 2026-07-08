@@ -1,9 +1,9 @@
-package org.firstinspires.ftc.teamcode.AngelosBase.Samples;
+package org.firstinspires.ftc.teamcode.Samples;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.AngelosBase.Subsystems.OmniDrive;
+import org.firstinspires.ftc.teamcode.Subsystems.OmniDrive;
 
 /**
  * <p>

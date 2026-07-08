@@ -1,7 +1,7 @@
-package org.firstinspires.ftc.teamcode.AngelosBase.Subsystems;
+package org.firstinspires.ftc.teamcode.Subsystems;
 
 
-import static org.firstinspires.ftc.teamcode.AngelosBase.Config.OmniDriveConfig.MAX_SPEED;
+import static org.firstinspires.ftc.teamcode.Config.OmniDriveConfig.MAX_SPEED;
 
 import com.qualcomm.hardware.bosch.BHI260IMU;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
@@ -11,8 +11,8 @@ import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.teamcode.AngelosBase.Config.HardwareMapConfig;
-import org.firstinspires.ftc.teamcode.AngelosBase.Config.OmniDriveConfig;
+import org.firstinspires.ftc.teamcode.Config.HardwareMapConfig;
+import org.firstinspires.ftc.teamcode.Config.OmniDriveConfig;
 
 public class OmniDrive {
     public enum DriveMode {
