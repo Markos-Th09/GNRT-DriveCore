@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.Config.HardwareMapConfig;
 import org.firstinspires.ftc.teamcode.Subsystems.TankDrive;
 
 // This TEST FILE: tunes the feedforward values for the drivebase motors
@@ -22,8 +23,8 @@ public class FeedForwardTuner extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-        leftMotor = hardwareMap.get(DcMotorEx.class, TankDrive.LEFT_MOTOR_NAME);
-        rightMotor = hardwareMap.get(DcMotorEx.class, TankDrive.RIGHT_MOTOR_NAME);
+        leftMotor = hardwareMap.get(DcMotorEx.class, HardwareMapConfig.LEFT_DRIVE_ID);
+        rightMotor = hardwareMap.get(DcMotorEx.class, HardwareMapConfig.RIGHT_DRIVE_ID);
 
         leftMotor.setDirection(DcMotorEx.Direction.REVERSE);
         leftMotor.setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior.BRAKE);

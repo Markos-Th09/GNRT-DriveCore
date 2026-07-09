@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.Subsystems;
 
 
 import static org.firstinspires.ftc.teamcode.Config.OmniDriveConfig.MAX_SPEED;
+import static org.firstinspires.ftc.teamcode.Config.OmniDriveConfig.MOTOR_ZERO_POWER_BEHAVIOR;
+import static org.firstinspires.ftc.teamcode.Config.OmniDriveConfig.ROBOT_IMU_TYPE;
 
 import com.qualcomm.hardware.bosch.BHI260IMU;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
@@ -19,9 +21,9 @@ public class OmniDrive {
         ROBOT_CENTRIC, FIELD_CENTRIC
     }
 
-    private DriveMode driveMode = DriveMode.ROBOT_CENTRIC;
+    private final DriveMode driveMode;
 
-    private Telemetry telemetry;
+    private final Telemetry telemetry;
 
 
     private final DcMotorEx leftFrontDrive;
@@ -31,7 +33,7 @@ public class OmniDrive {
 
     private IMU imu;
 
-    public OmniDrive(HardwareMap hardwareMap, Telemetry telemetry) {
+    public OmniDrive(HardwareMap hardwareMap, Telemetry telemetry, DriveMode driveMode) {
         leftFrontDrive = hardwareMap.get(DcMotorEx.class, HardwareMapConfig.LEFT_FRONT_DRIVE_ID);
         leftBackDrive = hardwareMap.get(DcMotorEx.class, HardwareMapConfig.LEFT_BACK_DRIVE_ID);
         rightFrontDrive = hardwareMap.get(DcMotorEx.class, HardwareMapConfig.RIGHT_FRONT_DRIVE_ID);
@@ -42,9 +44,19 @@ public class OmniDrive {
         rightFrontDrive.setDirection(OmniDriveConfig.RIGHT_FRONT_DRIVE_DIRECTION);
         rightBackDrive.setDirection(OmniDriveConfig.RIGHT_BACK_DRIVE_DIRECTION);
 
-        imu = hardwareMap.get(IMU.class, HardwareMapConfig.IMU_ID);
+        leftFrontDrive.setZeroPowerBehavior(MOTOR_ZERO_POWER_BEHAVIOR);
+        leftBackDrive.setZeroPowerBehavior(MOTOR_ZERO_POWER_BEHAVIOR);
+        rightFrontDrive.setZeroPowerBehavior(MOTOR_ZERO_POWER_BEHAVIOR);
+        rightBackDrive.setZeroPowerBehavior(MOTOR_ZERO_POWER_BEHAVIOR);
 
-        imu = hardwareMap.get(BHI260IMU.class, "imu");
+        this.driveMode = driveMode;
+
+        if (driveMode == DriveMode.FIELD_CENTRIC) {
+            if (ROBOT_IMU_TYPE == OmniDriveConfig.ImuType.BHI260)
+                imu = hardwareMap.get(BHI260IMU.class, HardwareMapConfig.IMU_ID);
+            else
+                imu = hardwareMap.get(IMU.class, HardwareMapConfig.IMU_ID);
+        }
 
         RevHubOrientationOnRobot orientationOnRobot =
                 new RevHubOrientationOnRobot(
@@ -90,9 +102,6 @@ public class OmniDrive {
         rightBackDrive.setPower(rightBackPower);
     }
 
-    public void setDriveMode(DriveMode driveMode) {
-        this.driveMode = driveMode;
-    }
 
     public DriveMode getDriveMode() {
         return this.driveMode;

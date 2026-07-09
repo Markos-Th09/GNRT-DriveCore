@@ -17,12 +17,10 @@ public class Sample_OmniDrive extends OpMode {
 
     @Override
     public void init() {
-        omniDrive = new OmniDrive(hardwareMap, telemetry);
-
         // Εδώ γίνεται η επιλογή της λειτουργίας οδήγησης της βάσης,
         // δηλαδή, εάν θα μεταφράζει την κατεύθυνση του αναλογικού stick του χειρηστιρίου
         // σε σχέση με το ρομπότ ή σε σχέση με την πίστα.
-        omniDrive.setDriveMode(OmniDrive.DriveMode.FIELD_CENTRIC);
+        omniDrive = new OmniDrive(hardwareMap, telemetry, OmniDrive.DriveMode.FIELD_CENTRIC);
     }
 
     @Override
