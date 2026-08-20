@@ -86,4 +86,36 @@ public class GamepadEx {
     public double getRightTrigger() {
         return controller.right_trigger;
     }
+
+    /**
+     * Checks if there is any active input on the gamepad.
+     * Sticks and triggers are checked against a small deadzone.
+     * All buttons in the map are checked for their current state.
+     * @return true if any input is detected, false otherwise.
+     */
+    public boolean hasInput() {
+        double deadzone = 0.05;
+
+        // Check sticks
+        if (Math.abs(controller.left_stick_x) > deadzone ||
+            Math.abs(controller.left_stick_y) > deadzone ||
+            Math.abs(controller.right_stick_x) > deadzone ||
+            Math.abs(controller.right_stick_y) > deadzone) {
+            return true;
+        }
+
+        // Check triggers
+        if (controller.left_trigger > deadzone || controller.right_trigger > deadzone) {
+            return true;
+        }
+
+        // Check all buttons
+        for (boolean curState : cur_states) {
+            if (curState) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
