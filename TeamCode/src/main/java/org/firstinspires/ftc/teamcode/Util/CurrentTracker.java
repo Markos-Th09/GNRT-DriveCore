@@ -14,12 +14,13 @@ import java.util.Objects;
 /**
  * Utility class for monitoring motor current consumption.
  *
- * <p>Tracks:
+ * <p>
+ * Tracks:
  * <ul>
- *     <li>Instantaneous current per motor</li>
- *     <li>Maximum current per motor</li>
- *     <li>Total instantaneous current</li>
- *     <li>Maximum total current</li>
+ * <li>Instantaneous current per motor</li>
+ * <li>Maximum current per motor</li>
+ * <li>Total instantaneous current</li>
+ * <li>Maximum total current</li>
  * </ul>
  */
 public class CurrentTracker {
@@ -35,9 +36,9 @@ public class CurrentTracker {
     /**
      * Creates a new CurrentTracker.
      *
-     * @param motorNames list of motor names to track
+     * @param motorNames  list of motor names to track
      * @param hardwareMap hardware map used to access motors
-     * @param telemetry telemetry instance used to display current information
+     * @param telemetry   telemetry instance used to display current information
      */
     public CurrentTracker(
             List<String> motorNames,
@@ -71,7 +72,9 @@ public class CurrentTracker {
      * Reads the current consumption of all tracked motors,
      * updates maximum values, and adds the results to telemetry.
      *
-     * <p>Should be called once during each OpMode loop iteration.</p>
+     * <p>
+     * Should be called once during each OpMode loop iteration.
+     * </p>
      */
     public void update() {
         totalCurrent = 0.0;
@@ -156,5 +159,15 @@ public class CurrentTracker {
      */
     public double getMaxTotalCurrent() {
         return maxTotalCurrent;
+    }
+
+    /**
+     * Resets all current measurements.
+     */
+    public void reset() {
+        currentByMotor.clear();
+        maxCurrentByMotor.clear();
+        totalCurrent = 0.0;
+        maxTotalCurrent = 0.0;
     }
 }
