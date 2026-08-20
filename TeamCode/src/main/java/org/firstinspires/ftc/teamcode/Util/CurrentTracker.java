@@ -54,9 +54,9 @@ public class CurrentTracker {
                 motorNames,
                 "motorNames cannot be null");
 
-        this.currentByMotor = new HashMap<>();
-        this.maxCurrentByMotor = new HashMap<>();
-        this.motors = new HashMap<>();
+        this.currentByMotor = new LinkedHashMap<>();
+        this.maxCurrentByMotor = new LinkedHashMap<>();
+        this.motors = new LinkedHashMap<>();
 
         for (String motorName : motorNames) {
             motors.put(motorName, hardwareMap.get(DcMotorEx.class, motorName));
