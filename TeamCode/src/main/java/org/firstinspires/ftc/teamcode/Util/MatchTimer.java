@@ -2,12 +2,22 @@ package org.firstinspires.ftc.teamcode.Util;
 
 import androidx.annotation.NonNull;
 
+/**
+ * Utility class for tracking elapsed match time.
+ *
+ * <p>
+ * The timer can be started explicitly or automatically on the first
+ * detected input from one or two gamepads.
+ * <p>
+ *
+ * Elapsed time can be retrieved in nanoseconds, milliseconds, or seconds.
+ */
 public class MatchTimer {
     private long startTime;
     private boolean started;
 
-    private static final long MILLIS_IN_NANO = 1_000_000;
-    private static final long SECONDS_IN_NANO = 1_000_000_000;
+    private static final long MILLIS_IN_NANOS = 1_000_000;
+    private static final long SECONDS_IN_NANOS = 1_000_000_000;
 
     public MatchTimer() {
         this.started = false;
@@ -25,6 +35,14 @@ public class MatchTimer {
     }
 
     /**
+     * Resets the timer
+     */
+    public void reset() {
+        started = false;
+        startTime = 0;
+    }
+
+    /**
      * Resets and starts the timer.
      */
     public void resetAndStart() {
@@ -37,7 +55,7 @@ public class MatchTimer {
      *
      * @return elapsed time in nanoseconds, or 0 if the timer has not started.
      */
-    public long getElapsedTimeNano() {
+    public long getElapsedTimeNanos() {
         if (!started) {
             return 0;
         }
@@ -50,7 +68,7 @@ public class MatchTimer {
      * @return elapsed time in milliseconds, or 0 if the timer has not started.
      */
     public long getElapsedTimeMillis() {
-        return getElapsedTimeNano() / MILLIS_IN_NANO;
+        return getElapsedTimeNanos() / MILLIS_IN_NANOS;
     }
 
     /**
@@ -59,7 +77,7 @@ public class MatchTimer {
      * @return elapsed time in seconds, or 0 if the timer has not started.
      */
     public double getElapsedTimeSeconds() {
-        return (double) getElapsedTimeNano() / SECONDS_IN_NANO;
+        return (double) getElapsedTimeNanos() / SECONDS_IN_NANOS;
     }
 
     /**
@@ -71,7 +89,13 @@ public class MatchTimer {
 
     /**
      * Starts the timer if there is any input on the gamepad.
-     * @param controller The gamepad to check for input.
+     *
+     * <p>
+     * {@link GamepadEx#update()} must be called before this method so that
+     * {@link GamepadEx#hasInput()} reflects the current controller state.
+     * </p>
+     *
+     * @param controller the gamepad to check for input.
      */
     public void startOnFirstInput(@NonNull GamepadEx controller) {
         if (controller.hasInput()) {
@@ -80,9 +104,15 @@ public class MatchTimer {
     }
 
     /**
-     * Starts the timer if there is any input on either gamepad.
-     * @param controller1 The first gamepad to check for input.
-     * @param controller2 The second gamepad to check for input.
+     * Starts the timer if there is any input on either gamepad
+     *
+     * <p>
+     * {@link GamepadEx#update()} must be called on both controllers before this method so that
+     * {@link GamepadEx#hasInput()} reflects the current controller state.
+     * </p>
+     *
+     * @param controller1 the first gamepad to check for input.
+     * @param controller2 the second gamepad to check for input.
      */
     public void startOnFirstInput(@NonNull GamepadEx controller1, @NonNull GamepadEx controller2) {
         if (controller1.hasInput() || controller2.hasInput()) {

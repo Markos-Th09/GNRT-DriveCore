@@ -25,6 +25,7 @@ public class Sample_MatchTimer extends LinearOpMode {
 
             matchTimer.startOnFirstInput(controller);
 
+            telemetry.addData("Timer Started", matchTimer.hasStarted());
             telemetry.addData("Elapsed Time", matchTimer.getElapsedTimeSeconds());
             telemetry.update();
         }

@@ -19,6 +19,8 @@ public class GamepadEx {
     private boolean cur_states[] = new boolean[Button.values().length];
     private boolean prev_states[] = new boolean[Button.values().length];
 
+    private static final double GAMEPAD_DEADZONE = 0.05;
+
     public GamepadEx(Gamepad gamepad1) {
         this.controller = gamepad1;
 
@@ -94,18 +96,16 @@ public class GamepadEx {
      * @return true if any input is detected, false otherwise.
      */
     public boolean hasInput() {
-        double deadzone = 0.05;
-
         // Check sticks
-        if (Math.abs(controller.left_stick_x) > deadzone ||
-            Math.abs(controller.left_stick_y) > deadzone ||
-            Math.abs(controller.right_stick_x) > deadzone ||
-            Math.abs(controller.right_stick_y) > deadzone) {
+        if (Math.abs(controller.left_stick_x) > GAMEPAD_DEADZONE ||
+            Math.abs(controller.left_stick_y) > GAMEPAD_DEADZONE ||
+            Math.abs(controller.right_stick_x) > GAMEPAD_DEADZONE ||
+            Math.abs(controller.right_stick_y) > GAMEPAD_DEADZONE) {
             return true;
         }
 
         // Check triggers
-        if (controller.left_trigger > deadzone || controller.right_trigger > deadzone) {
+        if (controller.left_trigger > GAMEPAD_DEADZONE || controller.right_trigger > GAMEPAD_DEADZONE) {
             return true;
         }
 
