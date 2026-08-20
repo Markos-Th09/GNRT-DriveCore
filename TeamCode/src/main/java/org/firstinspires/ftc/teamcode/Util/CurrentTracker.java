@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -28,7 +28,6 @@ public class CurrentTracker {
     private final Map<String, DcMotorEx> motors;
     private final Map<String, Double> currentByMotor;
     private final Map<String, Double> maxCurrentByMotor;
-    private final Telemetry telemetry;
 
     private double totalCurrent;
     private double maxTotalCurrent;
@@ -38,15 +37,10 @@ public class CurrentTracker {
      *
      * @param motorNames  list of motor names to track
      * @param hardwareMap hardware map used to access motors
-     * @param telemetry   telemetry instance used to display current information
      */
     public CurrentTracker(
             List<String> motorNames,
-            HardwareMap hardwareMap,
-            Telemetry telemetry) {
-        this.telemetry = Objects.requireNonNull(
-                telemetry,
-                "telemetry cannot be null");
+            HardwareMap hardwareMap) {
         Objects.requireNonNull(
                 hardwareMap,
                 "hardwareMap cannot be null");
@@ -69,8 +63,8 @@ public class CurrentTracker {
     }
 
     /**
-     * Reads the current consumption of all tracked motors,
-     * updates maximum values, and adds the results to telemetry.
+     * Reads the current consumption of all tracked motors and
+     * updates maximum values
      *
      * <p>
      * Should be called once during each OpMode loop iteration.
@@ -98,14 +92,12 @@ public class CurrentTracker {
         if (totalCurrent > maxTotalCurrent) {
             maxTotalCurrent = totalCurrent;
         }
-
-        logTelemetry();
     }
 
     /**
      * Adds the current measurements to telemetry.
      */
-    private void logTelemetry() {
+    public void addTelemetry(Telemetry telemetry) {
         telemetry.addLine("--- Motor Current Tracker ---");
 
         for (String motorName : motors.keySet()) {
@@ -165,8 +157,11 @@ public class CurrentTracker {
      * Resets all current measurements.
      */
     public void reset() {
-        currentByMotor.clear();
-        maxCurrentByMotor.clear();
+        for (String motorName : motors.keySet()) {
+            currentByMotor.put(motorName, 0.0);
+            maxCurrentByMotor.put(motorName, 0.0);
+        }
+
         totalCurrent = 0.0;
         maxTotalCurrent = 0.0;
     }
